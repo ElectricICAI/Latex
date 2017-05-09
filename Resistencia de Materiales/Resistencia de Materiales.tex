@@ -1,0 +1,669 @@
+\documentclass[a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\title{Resistencia de Materiales \\
+\small 3ºC, I.E.M}
+\author{}
+\date{}
+\pagestyle{empty}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{tikz,pgfplots}
+\usepackage{subcaption}
+\usepackage[hidelinks]{hyperref}
+\usepackage[a4paper,margin=3cm]{geometry}
+\usepackage{gensymb}
+\usepackage{tikz-3dplot}
+\spanishdecimal{.}
+\usepackage{color}
+%%%%%%%% Matematicas
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\newcommand{\p}{ \cdot }
+\newcommand{\met}{\mbox{ m}}
+
+\begin{document}
+
+\maketitle
+
+\section{Vigas en 2D}
+\begin{center}
+    \begin{tikzpicture}
+    \draw[-,thick](0,0)--(3,0);
+    \draw[-](-0.3,-0.3)--(0,0);
+    \draw[-](0.3,-0.3)--(0,0);
+    \draw[-](-0.3,-0.3)--(0.3,-0.3);
+    
+    \draw[-](2.7,-0.3)--(3,0);
+    \draw[-](3.3,-0.3)--(3,0);
+    \draw[-](2.7,-0.3)--(3.3,-0.3);
+    
+    
+    \draw[-](3.5,0)--(4,0);
+    \draw[-](3.75,-0.25)--(3.75,0.25);
+    
+    \draw[-,thick](4.5,0)--(7.5,0);
+    \draw[-](4.2,-0.3)--(4.5,0);
+    \draw[-](4.8,-0.3)--(4.5,0);
+    \draw[-](4.2,-0.3)--(4.8,-0.3);
+    
+    \draw[-](7.2,-0.3)--(7.5,0);
+    \draw[-](7.8,-0.3)--(7.5,0);
+    \draw[-](7.2,-0.3)--(7.8,-0.3);
+    
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \coordinate (C) at (4.5,0);
+        \coordinate (D) at (7.5,0);
+        \coordinate (G) at (1.5,-0.5);
+        \coordinate (H) at (6,-0.5);
+        
+        \draw[fill=white] (A) circle (1pt) node[above right]{\small A};
+        \draw[fill=white] (B) circle (1pt) node[above left]{\small B};
+        \draw[fill=white] (C) circle (1pt) node[above right]{\small B};
+        \draw[fill=white] (D) circle (1pt) node[above left]{\small C};
+        \draw[] (G)  node[]{\small (a)};
+        \draw[] (H)  node[]{\small (b)};
+    %\draw[-](3,0)--(3.5,0.5) ;
+    %\draw (3.5,0) arc(0:45:0.5);
+    %\coordinate (D) at (3.5,0.1);
+    %\draw[] (D)  node[above right]{$\theta_B$};
+    
+    %\draw[-](3,0)--(2.5,-0.5) ;
+    %\draw (2.5,0) arc(180:225:0.5);
+    \coordinate (E) at (2.5,-0.1);
+    \draw[] (E)  node[below left]{$\theta_B$};
+    
+
+    \coordinate (F) at (5,-0.1);
+    \draw[] (F)  node[below right]{$\theta_B$};
+    \draw[<-] (2.55,0.4)node[above left]{\small$M$} arc(0:-150:-0.4);
+    \draw[<-] (4.9,0.4)node[above right]{\small$M$} arc(0:150:0.4);
+    %Flecha A
+    \draw[-](3,0)--(2.5,-0.31);
+    %\draw[<-](0,-1.732)--(0,0);
+    %Arco en B: 30 grados
+    \draw (2.56698,-0.25) arc(210:180:0.5)[<-];
+    
+    %Flecha A hacia el otro lado 
+    \draw[-](4.5,0)--(5,-0.31);
+    %\draw[<-](0,-1.732)--(0,0);
+    %Arco en B: 30 grados
+    \draw (4.933,-0.25) arc(-30:0:0.5)[<-];
+    \end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.75]
+     %ejes en G
+    \draw[-,thick](0,0)--(3,0) ;
+    \draw[-,thick](0,0)--(0,-3);
+    \draw[fill=black] (-0.3,-3) rectangle (0.3,-3.1);
+
+    %articulacion
+    \draw[-](0,0)--(-0.3,0.3)--(-0.3,-0.3)--(0,0);
+    \coordinate (A) at (0,0);
+    \draw[fill=white] (A) circle (1pt) node[above left]{};
+    
+    %ejes 
+    \draw[<-](-0.7,-3)node[above]{\scriptsize$x$}--(-1.5,-3);
+    \draw[<-](-1.4,-2.3)node[right]{\scriptsize$y$}--(-1.4,-3.1);
+    
+    \coordinate (A) at (4,0);
+    \draw[] (A) node[]{$=$};
+    
+     %ejes en G
+    \draw[-,thick](6,0)--(9,0) ;
+    \draw[-,thick](6,0)--(6,-3);
+    \draw[fill=black] (5.7,-3) rectangle (6.3,-3.1);
+
+    %articulacion
+    \draw[<-](5.8,0)--(5.15,0)node[above]{\scriptsize$R_x^B$};
+    \draw[<-](5.8,-0.1)--(5.8,-0.65)node[below left]{\scriptsize$R_y^B$};
+    
+    \coordinate (A) at (10,0);
+    \draw[] (A) node[]{$+$};
+    \coordinate (A) at (11.5,0.3);
+    \draw[] (A) node[]{$\delta_{v,B}=0$};
+    \coordinate (A) at (11.5,-0.3);
+    \draw[] (A) node[]{$\delta_{h,B}=0$};
+    
+    
+    \coordinate (B) at (0,-3);
+    \draw[] (B) node[above right]{\small A};
+    \coordinate (B) at (0,0);
+    \draw[] (B) node[below right]{\small B};
+    \coordinate (B) at (3,0);
+    \draw[] (B) node[below left]{\small C};
+    
+    \coordinate (B) at (6,-3);
+    \draw[] (B) node[above right]{\small A};
+    \coordinate (B) at (6,0);
+    \draw[] (B) node[below right]{\small B};
+    \coordinate (B) at (9,0);
+    \draw[] (B) node[below left]{\small C};
+    \end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \begin{tikzpicture}
+    %ejes
+    \draw[<-] (2.3,0)node[right]{\scriptsize$x$} -- (0,0);
+    \draw [<-] (0,0.85)node[left]{\scriptsize$M_z(x)$} -- (0,-2.3);
+    %grafica
+    \draw [domain=0:2] plot(\x, { -0.5*\x^2+2*\x-2 } );
+    \draw[<-](4.5,0)--(3.5,0);
+    
+    \coordinate (A) at (2,0);
+    \coordinate (B) at (7,-0.2);
+    \coordinate (C) at (0,-2);
+    
+    \draw[fill=black] (C) circle (1pt) node[left]{\small$-\frac{qL^2}{2}$};
+    \draw[] (B) node[]{$=\frac{q\cdot L^3}{6EI_z}\:(\curvearrowright)$};
+    
+    \coordinate (D) at (7,0.5);
+    \draw[] (D) node[]{$\theta_C^{q} = \frac{1}{EI_z}\int_0^L (-q\p\frac{x^2}{2}) dx=$};
+    
+    %estructura
+    \draw[-,thick](0,0)--(2,0);
+    \draw[fill=black] (0,0.3) rectangle (-0.05,-0.3);
+    \coordinate (D) at (0,0);
+    \draw[] (D) node[below left]{\small B};
+    \coordinate (E) at (2,0);
+    \draw[] (E) node[below]{\small C};
+    \coordinate (F) at (1.15,-0.25);
+    \draw[] (F) node[left]{\small$L$};
+    \draw[<-](0.25,0.05)--(0.25,0.35);
+    \draw[<-](0.5,0.05)--(0.5,0.35);
+    \draw[<-](0.75,0.05)--(0.75,0.35);
+    \draw[<-](1,0.05)--(1,0.35);
+    \draw[<-](1.25,0.05)--(1.25,0.35);
+    \draw[<-](1.5,0.05)--(1.5,0.35);
+    \draw[<-](1.75,0.05)--(1.75,0.35);
+    \draw[<-](2,0.05)--(2,0.35);
+    \end{tikzpicture}
+\end{center}
+
+
+\section{Pórticos con diagramas de esfuerzos}
+\textbf{Diagrama de Momentos Flectores}
+\begin{center}
+    \begin{tikzpicture}
+     %ejes en G
+    \draw[-,very thick](0,0)--(5,0) ;
+    \draw[-,very thick](0,0)--(-3,0);
+    \draw[-,very thick](5,0)--(5,-4);
+    \draw[-,very thick](0,0)--(-3,-4);
+    
+    %Puntos de la estructura
+    \coordinate (A) at (-3,-4);
+    \draw[fill=white] (A) circle (2pt) node[above left]{A};
+    \coordinate (B) at (0,0);
+    \draw[] (B)  node[above right]{B};
+    \coordinate (C) at (3.3783,0);
+    \draw[fill=white] (C) circle (2pt) node[above right]{C};
+    \coordinate (D) at (5,0);
+    \draw[] (D)  node[above right]{D};
+    \coordinate (E) at (5,-4);
+    \draw[fill=white] (E) circle (2pt) node[above right]{E};
+    \coordinate (F) at (-3,0);
+    \draw[] (F)  node[above right]{E};
+    
+    %Articulacion E
+    \draw[-](5,-4)--(5.4,-4.4)--(4.6,-4.4)--(5,-4);
+    %Articulacion A
+    \draw[-](-3,-4)--(-3.4,-4.4)--(-2.6,-4.4)--(-3,-4);
+    
+    %ejes EBCD
+    \draw[<-](5,2)node[left]{\scriptsize$M_z(x)$}--(5,0.9);
+    \draw[<-](4,1)node[above]{\scriptsize$x$}--(5.1,1);
+    
+    %ejes ED
+    \draw[<-](6.5,-4)node[left,rotate=-90]{\scriptsize$M_z(x)$}--(5.4,-4);
+    \draw[<-](5.5,-3)node[above,rotate=-90]{\scriptsize$x$}--(5.5,-4.1);
+    
+    %ejes AB
+    \draw[<-](-3.8,-3.4)node[right,rotate=53.13]{\scriptsize$M_z(x)$}--(-3.2,-3.85);
+    \draw[<-](-2.6,-3.05)node[above,rotate=53.13]{\scriptsize$x$}--(-3.2,-3.85);
+    
+    %grafica EBCD
+    \draw [domain=0:5,cyan,thick] plot(\x, { -0.37*\x^2+1.25*\x } );
+    \draw [domain=0:-3,cyan,thick] plot(\x, { -(\x+3)^2/6 } );;
+    \draw[-,cyan,thick](0,0)--(0,-1.5);
+    %graficaED
+    \draw[-,cyan,dashed](2,0)--(5,-4);
+    
+    %graficaAD
+    \draw[-,cyan,dashed](-3,-4)--(-1.2,0.9)--(0,0);
+    
+    %Puntos de la criticos
+    \coordinate (G) at (-1.2,0.9);
+    \draw[fill=black] (G) circle (1pt) node[above left]{\scriptsize$90\:kN\p m$};
+    \coordinate (H) at (0,-1.5);
+    \draw[fill=black] (H) circle (1pt) node[below right]{\scriptsize$-90\:kN\p m$};
+    \coordinate (I) at (1.689,1.0557);
+    \draw[fill=black] (I) circle (1pt) node[above right]{\scriptsize$10\:kN\p m$};
+    \coordinate (J) at (5,-3);
+    \draw[fill=black] (J) circle (1pt) node[above right]{\scriptsize$-150\:kN\p m$};
+    \coordinate (K) at (2,0);
+    \draw[fill=black] (K) circle (1pt) node[below ]{\scriptsize$-150\:kN\p m$};
+    \draw[<-](-4.2,-4)node[right]{\scriptsize$x$}--(-5.05,-4);
+    \draw[<-](-5,-3.2)node[right]{\scriptsize$y$}--(-5,-4.05);
+    \end{tikzpicture}
+\end{center}
+\newpage
+\textbf{Diagrama de Esfuerzos Cortantes}
+\begin{center}
+    \begin{tikzpicture}
+     %ejes en G
+    \draw[-,very thick](0,0)--(5,0) ;
+    \draw[-,very thick](0,0)--(-3,0);
+    \draw[-,very thick](5,0)--(5,-4);
+    \draw[-,very thick](0,0)--(-3,-4);
+    
+    %Puntos de la estructura
+    \coordinate (A) at (-3,-4);
+    \draw[fill=white] (A) circle (2pt) node[above left]{A};
+    \coordinate (B) at (0,0);
+    \draw[] (B)  node[above right]{B};
+    \coordinate (C) at (3.3783,0);
+    \draw[fill=white] (C) circle (2pt) node[above right]{C};
+    \coordinate (D) at (5,0);
+    \draw[] (D)  node[above right]{D};
+    \coordinate (E) at (5,-4);
+    \draw[fill=white] (E) circle (2pt) node[above right]{E};
+    \coordinate (F) at (-3,0);
+    \draw[] (F)  node[above right]{E};
+    
+    %Articulacion E
+    \draw[-](5,-4)--(5.4,-4.4)--(4.6,-4.4)--(5,-4);
+    %Articulacion A
+    \draw[-](-3,-4)--(-3.4,-4.4)--(-2.6,-4.4)--(-3,-4);
+    
+    %ejes EBCD
+    \draw[<-](5,2)node[left]{\scriptsize$V_y(x)$}--(5,0.9);
+    \draw[<-](4,1)node[above]{\scriptsize$x$}--(5.1,1);
+    
+    %ejes ED
+    \draw[<-](6.5,-4)node[left,rotate=-90]{\scriptsize$V_y(x)$}--(5.4,-4);
+    \draw[<-](5.5,-3)node[above,rotate=-90]{\scriptsize$x$}--(5.5,-4.1);
+    
+    %ejes AB
+    \draw[<-](-3.8,-3.4)node[right,rotate=53.13]{\scriptsize$V_y(x)$}--(-3.2,-3.85);
+    \draw[<-](-2.6,-3.05)node[above,rotate=53.13]{\scriptsize$x$}--(-3.2,-3.85);
+    
+    %grafica EBCD
+    \draw[-,cyan, thick](5,0)--(5,1.2)--(1.689,0)--(0,-0.61214)--(0,1)--(-3,0);
+ 
+    
+    %graficaED
+    \draw[-,cyan,dashed](4,0)--(4,-4)--(5,-4);
+    
+    %graficaAD
+    \draw[-,cyan,dashed](-3,-4)--(-3.8,-3.4)--(-0.8,0.6)--(0,0);
+    
+    %Puntos de la criticos
+    \coordinate (G) at (-0.8,0.6);
+    \draw[fill=black] (G) circle (1pt) node[above left]{\scriptsize$18\:kN$};
+    \coordinate (H) at (0,1);
+    \draw[fill=black] (H) circle (1pt) node[below right]{\scriptsize$60\:kN$};
+    \coordinate (I) at (0,-0.61214);
+    \draw[fill=black] (I) circle (1pt) node[below right]{\scriptsize$-20\:kN$};
+    \coordinate (J) at (5,1.2);
+    \draw[fill=black] (J) circle (1pt) node[above right]{\scriptsize$80\:kN$};
+    \coordinate (J) at (4,-4);
+    \draw[fill=black] (J) circle (1pt) node[above left]{\scriptsize$-37.5\:kN$};
+    \draw[<-](-4.2,-4)node[right]{\scriptsize$x$}--(-5.05,-4);
+    \draw[<-](-5,-3.2)node[right]{\scriptsize$y$}--(-5,-4.05);
+    
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Diagrama de Esfuerzos Axiles}
+\begin{center}
+    \begin{tikzpicture}
+     %ejes en G
+    \draw[-,very thick](0,0)--(5,0) ;
+    \draw[-,very thick](0,0)--(-3,0);
+    \draw[-,very thick](5,0)--(5,-4);
+    \draw[-,very thick](0,0)--(-3,-4);
+    
+    %Puntos de la estructura
+    \coordinate (A) at (-3,-4);
+    \draw[fill=white] (A) circle (2pt) node[above left]{A};
+    \coordinate (B) at (0,0);
+    \draw[] (B)  node[above right]{B};
+    \coordinate (C) at (3.3783,0);
+    \draw[fill=white] (C) circle (2pt) node[above right]{C};
+    \coordinate (D) at (5,0);
+    \draw[] (D)  node[above right]{D};
+    \coordinate (E) at (5,-4);
+    \draw[fill=white] (E) circle (2pt) node[above right]{E};
+    \coordinate (F) at (-3,0);
+    \draw[] (F)  node[above right]{E};
+    
+    %Articulacion E
+    \draw[-](5,-4)--(5.4,-4.4)--(4.6,-4.4)--(5,-4);
+    %Articulacion A
+    \draw[-](-3,-4)--(-3.4,-4.4)--(-2.6,-4.4)--(-3,-4);
+    
+    %ejes EBCD
+    \draw[<-](5,2)node[left]{\scriptsize$N(x)$}--(5,0.9);
+    \draw[<-](4,1)node[above]{\scriptsize$x$}--(5.1,1);
+    
+    %ejes ED
+    \draw[<-](6.5,-4)node[left,rotate=-90]{\scriptsize$N(x)$}--(5.4,-4);
+    \draw[<-](5.5,-3)node[above,rotate=-90]{\scriptsize$x$}--(5.5,-4.1);
+    
+    %ejes AB
+    \draw[<-](-3.8,-3.4)node[right,rotate=53.13]{\scriptsize$N(x)$}--(-3.2,-3.85);
+    \draw[<-](-2.6,-3.05)node[above,rotate=53.13]{\scriptsize$x$}--(-3.2,-3.85);
+    
+    %grafica EBCD
+    \draw[-,cyan,thick](5,0)--(5,-0.5)--(0,-0.5)--(0,0);
+ 
+    
+    %graficaED
+    \draw[-,cyan,dashed](4,0)--(4,-4)--(5,-4);
+    
+    %graficaAD
+    \draw[-,cyan,dashed](-3,-4)--(-2.2,-4.6)--(0.8,-0.6)--(0,0);
+    
+    %Puntos de la criticos
+    \coordinate (G) at (0.8,-0.6);
+    \draw[fill=black] (G) circle (1pt) node[below right]{\scriptsize$-86.5\:kN$};
+
+    \coordinate (I) at (0,-0.5);
+    \draw[fill=black] (I) circle (1pt) node[below left]{\scriptsize$-37.5\:kN$};
+    \coordinate (J) at (5,-0.5);
+    \draw[fill=black] (J) circle (1pt) node[below right]{\scriptsize$-37.5\:kN$};
+    \coordinate (J) at (4,-4);
+    \draw[fill=black] (J) circle (1pt) node[above left]{\scriptsize$-80\:kN$};
+    \draw[<-](-4.2,-4)node[right]{\scriptsize$x$}--(-5.05,-4);
+    \draw[<-](-5,-3.2)node[right]{\scriptsize$y$}--(-5,-4.05);
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Diagrama de Momentos Flectores}
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+     %ejes en G
+    \draw[-,thick](0,0)--(3,0) ;
+    \draw[-,thick](0,0)--(0,-3);
+    \draw[fill=black] (-0.3,-3) rectangle (0.3,-3.1);
+
+    %articulacion
+    \draw[-](0,0)--(-0.3,0.3)--(-0.3,-0.3)--(0,0);
+    \coordinate (A) at (0,0);
+    \draw[fill=white] (A) circle (1pt) node[above left]{};
+    
+    %ejes ab
+    \draw[<-](-0.95,-3)node[above,rotate=90]{\scriptsize$M_z(x)$}--(-0.45,-3);
+    \draw[<-](-0.5,-2.55)node[right]{\scriptsize$x$}--(-0.5,-3.05);
+    %ejes bc
+    \draw[<-](0,0.95)node[above]{\scriptsize$M_z(x)$}--(0,0.45);
+    \draw[<-](0.45,0.5)node[right]{\scriptsize$x$}--(-0.05,0.5);
+    
+    
+    \coordinate (B) at (0,-3);
+    \draw[] (B) node[above right]{\small A};
+    \coordinate (B) at (0,0);
+    \draw[] (B) node[below right]{\small B};
+    \coordinate (B) at (3,0);
+    \draw[] (B) node[below left]{\small C};
+    
+    %fkector tramo AB
+    \draw[-,cyan,thick](0,-3)--(0.25,-3)--(-0.5,0)--(0,0);
+    %flector tramo BC
+    \draw [domain=0:3,cyan,thick] plot(\x, {-1.4 -0.6222*\x^2+2*\x } );
+    %Puntos criticos
+    \coordinate (X) at (0.25,-3);
+    \draw[fill=black] (X) circle (1pt) node[above right]{\scriptsize$-0.833\:kN\p m$};
+    \coordinate (Y) at (-0.5,0);
+    \draw[fill=black] (Y) circle (1pt) node[above left]{\scriptsize$1.667\:kN\p m$};
+    \coordinate (Z) at (0,-1.4);
+    \draw[fill=black] (Z) circle (1pt) node[below right]{\scriptsize$-20.333\:kN\p m$};
+    \coordinate (Z) at (3,-1);
+    \draw[fill=black] (Z) circle (1pt) node[below ]{\scriptsize$-17.833\:kN\p m$};
+    \coordinate (I) at (1.60,0.2077);
+    \draw[fill=black] (I) circle (1pt) node[above ]{\scriptsize$8.93\:kN\p m$};
+    \end{tikzpicture}
+\end{center}
+\newpage
+\textbf{Diagrama de Esfuerzos Cortantes}
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+     %ejes en G
+    \draw[-,thick](0,0)--(3,0) ;
+    \draw[-,thick](0,0)--(0,-3);
+    \draw[fill=black] (-0.3,-3) rectangle (0.3,-3.1);
+
+    %articulacion
+    \draw[-](0,0)--(-0.3,0.3)--(-0.3,-0.3)--(0,0);
+    \coordinate (A) at (0,0);
+    \draw[fill=white] (A) circle (1pt) node[above left]{};
+    
+    %ejes ab
+    \draw[<-](-0.95,-3)node[above,rotate=90]{\scriptsize$V_y(x)$}--(-0.45,-3);
+    \draw[<-](-0.5,-2.55)node[right]{\scriptsize$x$}--(-0.5,-3.05);
+    %ejes bc
+    \draw[<-](0,0.95)node[above]{\scriptsize$V_y(x)$}--(0,0.45);
+    \draw[<-](0.45,0.5)node[right]{\scriptsize$x$}--(-0.05,0.5);
+    \coordinate (B) at (0,-3);
+    \draw[] (B) node[above right]{\small A};
+    \coordinate (B) at (0,0);
+    \draw[] (B) node[below right]{\small B};
+    \coordinate (B) at (3,0);
+    \draw[] (B) node[below left]{\small C};
+    
+    %cortaante tramo AB
+    \draw[-,cyan,thick](0,-3)--(-0.4,-3)--(-0.4,0)--(-0,0);
+    %cortante tramo BC
+    \draw [cyan,thick](0,0)--(0,0.8)--(3,-0.7)--(3,0);
+    %Puntos criticos
+    \coordinate (X) at (-0.4,0);
+    \draw[fill=black] (X) circle (1pt) node[above left]{\scriptsize$0.625\:kN$};
+    \coordinate (Y) at (0,0.8);
+    \draw[fill=black] (Y) circle (1pt) node[above right]{\scriptsize$28.625\:kN$};
+    \coordinate (Z) at (3,-0.7);
+    \draw[fill=black] (Z) circle (1pt) node[below left]{\scriptsize$-27.375\:kN$};
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Diagrama de Esfuerzos Axiles}
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+     %ejes en G
+    \draw[-,thick](0,0)--(3,0) ;
+    \draw[-,thick](0,0)--(0,-3);
+    \draw[fill=black] (-0.3,-3) rectangle (0.3,-3.1);
+
+    %articulacion
+    \draw[-](0,0)--(-0.3,0.3)--(-0.3,-0.3)--(0,0);
+    \coordinate (A) at (0,0);
+    \draw[fill=white] (A) circle (1pt) node[above left]{};
+    
+    %ejes ab
+    \draw[<-](-0.95,-3)node[above,rotate=90]{\scriptsize$N(x)$}--(-0.45,-3);
+    \draw[<-](-0.5,-2.55)node[right]{\scriptsize$x$}--(-0.5,-3.05);
+    %ejes bc
+    \draw[<-](0,0.95)node[above]{\scriptsize$N(x)$}--(0,0.45);
+    \draw[<-](0.45,0.5)node[right]{\scriptsize$x$}--(-0.05,0.5);
+    
+    \coordinate (B) at (0,-3);
+    \draw[] (B) node[above right]{\small A};
+    \coordinate (B) at (0,0);
+    \draw[] (B) node[below right]{\small B};
+    \coordinate (B) at (3,0);
+    \draw[] (B) node[below left]{\small C};
+    
+    
+    %cortante tramo BC
+    \draw [cyan,thick](0,0)--(0,0.4)--(3,0.4)--(3,0);
+    \coordinate (Z) at (0,0.4);
+    \draw[fill=black] (Z) circle (1pt) node[below right]{\scriptsize$0.625\:kN$};
+    \end{tikzpicture}
+\end{center}
+
+\section{Vigas en 3D}
+\begin{center}
+    \tdplotsetmaincoords{60}{105}
+    \begin{tikzpicture}[tdplot_main_coords, scale=1]
+    \draw[<-](1,0,0)node[left]{\scriptsize$x$}--(-0.1,0,0);
+    \draw[<-](0,-1,0)node[below left]{\scriptsize$z$}--(0,0.1,0);
+    \draw[<-](0,0,1)node[below left]{\scriptsize$y$}--(0,0,-0.1);
+    \draw[-](0,-0.25,-0.25)--(0,-0.25,0.25)--(0,0.25,0.25)--(0,0.25,-0.25)--(0,-0.25,-0.25);
+    \draw[-,thick](0,0,0)--(2,0,0)--(2,4,0);
+    \draw[-,thick](2,0,0)--(2,0,-3);
+    \draw[-](1.75,-0.25,-3)--(1.75,0.25,-3)--(2.25,0.25,-3)--(2.25,-0.25,-3)--(1.75,-0.25,-3);
+    \coordinate (A) at (2,0,0);
+     \draw[fill=white] (A) circle (1.3pt);
+     \coordinate (B) at (2,4,0);
+     \draw[fill=white] (B) circle (1.3pt);
+     \draw[-](1.75,3.75,-0.25)--(1.75,4.25,-0.25)--(2.25,4.25,-0.25)--(2.25,3.75,-0.25)--(1.75,3.75,-0.25);
+     \draw[-](1.75,3.75,-0.25)--(2,4,0);
+     \draw[-](1.75,3.75,-0.25)--(2,4,0);
+     \draw[-](2.25,4.25,-0.25)--(2,4,0);
+     \draw[-](2.25,3.75,-0.25)--(2,4,0);
+     \draw[-](1.755,4.25,-0.25)--(2,4,0);
+    \coordinate (C) at (1.5,5,0);
+     \draw[] (C) node[]{$=$} ;
+     
+        \draw[<-](1,6,0)node[left]{\scriptsize$x$}--(-0.1,6,0);
+    \draw[<-](0,5,0)node[below left]{\scriptsize$z$}--(0,6.1,0);
+    \draw[<-](0,6,1)node[below left]{\scriptsize$y$}--(0,6,-0.1);
+    \draw[-](0,5.75,-0.25)--(0,5.75,0.25)--(0,6.25,0.25)--(0,6.25,-0.25)--(0,5.75,-0.25);
+    \draw[-,thick](0,6,0)--(2,6,0)--(2,10,0);
+
+
+     \draw[<-](2,6,-0.1)--(2,6,-0.7)node[left]{\small$R_y^B$};
+     \draw[<-](2,10,-0.1)--(2,10,-0.7)node[left]{\small$R_y^C$};
+    \coordinate (C) at (1.5,10.8,1);
+     \draw[] (C) node[]{$+$} ;
+     
+     \coordinate (C) at (1.5,12,1.55);
+     \draw[] (C) node[]{$\delta_{v,B}=0$};
+    \coordinate (C) at (1.5,12,0.75);
+     \draw[] (C) node[]{$\delta_{v,C}=0$};
+    %puntos
+    \coordinate (R) at (0,0,0);
+     \draw[] (R) node[above right]{\small A};
+        \coordinate (S) at (2,0,0);
+     \draw[] (S) node[below right]{\small B};
+      \coordinate (T) at (2,4,0);
+     \draw[] (T) node[above]{\small C};
+     %puntos
+    \coordinate (R) at (0,6,0);
+     \draw[] (R) node[above right]{\small A};
+        \coordinate (S) at (2,6,0);
+     \draw[] (S) node[below right]{\small B};
+      \coordinate (T) at (2,10,0);
+     \draw[] (T) node[above]{\small C};
+     
+     
+    \end{tikzpicture}
+\end{center}
+
+
+
+\section{Perfiles}
+\begin{center}
+    \begin{tikzpicture}
+    \draw[-](0,-2)--(0,2);
+    \draw[-](0.5,-2)--(0.5,2);
+    
+    %Parte de arriba
+    \draw[-](0,2)--(-1,2);
+    \draw[-](-1,2)--(-1,2.5);
+    \draw[-](-1,2.5)--(1,2.5);
+    \draw[-](1,2.5)--(1,2);
+    \draw[-](1,2)--(0.5,2);
+    %division 1
+    \draw[-,dashed](0,2)--(0.5,2);
+    
+    %Parte de abajo
+    \draw[-](0,-2)--(-0.5,-2);
+    \draw[-](-0.5,-2)--(-0.5,-2.5);
+    \draw[-](-0.5,-2.5)--(2.5,-2.5);
+    \draw[-](2.5,-2.5)--(2.5,-2);
+    \draw[-](2.5,-2)--(0.5,-2);
+    %division 1
+    \draw[-,dashed](0,-2)--(0.5,-2);
+    
+    %ejes
+    %\draw[<-](-0.5,-1.4)node[right]{$y$}--(-0.5,-2.9) ;
+    %\draw[<-](-1.6,-2.50)node[below right]{$z$}--(-0.5,-2.5) ;
+    
+    %Centros de Gravedad
+    \coordinate (A) at (0.05,1.3);
+    \coordinate (B) at (-1.5,-0.425);
+    \coordinate (C) at (1,2.5);
+    \coordinate (D) at (-0.5,-2.50);
+    \coordinate (E) at (0.44444,-0.25);
+    \coordinate (J) at (0.44444,-0.25);
+    \coordinate (Y) at (2.5,-2.5);
+    \draw[] (A)  node[ right]{\small$\alpha$};
+    \draw[] (B)  node[ right]{\small$\alpha$};
+    \draw[fill=black] (C) circle (1pt) node[ right]{\small$B(tracci\acute{o}n)$};
+    \draw[fill=black] (D) circle (1pt) node[ below left]{\small$C(compresi\acute{o}n)$};
+    \draw[fill=black] (E) circle (1pt) node[ below right]{\small$O=G_{total}$};
+    %ejes en G
+    \draw[<-,dashed,thin](0.44444,2.75)node[right]{$y_g$}--(0.44444,-0.35) ;
+    \draw[<-,dashed,thin](-2.5,-0.25)node[below right]{$z_g$}--(0.44444,-0.25) ;
+    \draw[fill=black] (Y) circle (1pt) node[ right]{\small$A$};
+    %ejes principales
+    %\draw[<-](-0.418505,1.95572)node[right]{$1_g$}--(0,0) ;
+    %\draw[<-](-1.95572,-0.418505)node[right]{$1_g$}--(0,0) ;
+    %\draw[-](-2,0)--(0,0);
+    
+     %ejes principales
+    %\draw[<-](0.025939,1.70572)node[right]{$1_g$}--(0.4444444,-0.25) ;
+    %\draw[<-](-1.511276,-0.668505)node[right]{$2_g$}--(0.4444444,-0.25) ;
+    
+      %ejes principales
+    \draw[<-](-0.183313,2.68358)node[left]{$w:2$}--(0.4444444,-0.25) ;
+    \draw[<-](-2.48914,-0.877757)node[below right]{$u:1$}--(0.4444444,-0.25) ;
+    
+    \draw (0.4444,1) arc(90:105:1);
+    \draw (-1,-0.25) arc(180:197:1);
+    
+    %Fibra neutra
+    \draw[-,dashed](-1.5,3.31737)node[below left]{\small$w = 2.027\p u$}--(0.44444,-0.25);
+    \draw[-,dashed](1.94,-2.98)node[below right]{\small$fibra\:\: neutra$}--(0.44444,-0.25);
+    %\draw[-,dashed](-1.5,3.0398)--(1.9444444,-3.2898);
+     \draw[<-](2,-0.25)node[right]{$M_{z_g}$}--(0.4444444,-0.25) ;
+    \end{tikzpicture}
+\end{center}
+
+
+
+\section{Círculos de Mohr}
+\begin{center}
+    \begin{tikzpicture}
+    \draw[<-](-2.5,2.5) node[right]{$I_{yz}$}--(-2.5,-2.5);
+    \draw[<-](3,0) node[below right]{$I$}--(-3,0);
+        \draw (0,0) circle (2cm);
+        \coordinate (A) at (1.732,0);
+        \coordinate (B) at (1.732,-1);
+        \coordinate (C) at (1,-0.3);
+        \coordinate (D) at (-1.732,1);
+        \coordinate (E) at (0,0);
+        \coordinate (F) at (-1,0.3);
+        \coordinate (G) at (-2,0);
+        \coordinate (H) at (2,0);
+        \draw (1,0) arc(0:-30:1)[<-];
+        \draw (-1,0) arc(0:-30:-1)[<-];
+        \draw (0,0) -- (1.732,-1);
+        \draw[fill=blue] (B) circle (2pt) node[ right]{$z:(I_{zz},-I_{yz})=(241.5,-46)$};
+        \draw (C) node[right]{$2\alpha$};
+        \draw (F) node[left]{$2\alpha$};
+        \draw[fill=blue] (D) circle (2pt) node[ left]{$y:(I_{yy},I_{yz})=(36.38,46)$};
+        \draw (0,0) -- (-1.732,1);
+        \draw[fill=black] (E) circle (1pt) node[below left]{O};
+        \draw[fill=black] (G) circle (1pt) node[below left]{$I_2$};
+        \draw[fill=black] (H) circle (1pt) node[below right]{$I_1$};
+    \end{tikzpicture}
+\end{center}
+
+\end{document}
