@@ -1,0 +1,383 @@
+\documentclass[a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\date{\today}
+\pagestyle{empty}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{pgfplots.statistics}
+\usepackage{subcaption}
+\usepackage[hidelinks]{hyperref}
+\usepackage[a4paper,margin=3cm]{geometry}
+\spanishdecimal{.}
+\usepackage{tikz-3dplot}
+\spanishdecimal{.}
+\pgfplotsset{compat=1.5}
+\usepackage{multirow}
+\usepackage{steinmetz}
+%%%%%%%% Matematicas
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+
+
+\title{Práctica n$^{\circ}$7: Obtención Curvas Magnéticas en C.A.\\
+\small Laboratorio de Instrumentación Eléctrica\\
+\small4$^{\circ}$B, I.E.M}
+\author{Gonzalo Sánchez Contreras\\
+Antonio Rubí Rodríguez\\
+Ignacio Sanz Soriano
+}
+\date{22 de noviembre de 2016}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[cuteinductors]{circuitikz}
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{0.0pt}
+\fancyhead[R]{\textit{4$^{\circ}$B, I.E.M.}}\fancyhead[L]{\empty}
+\fancyfoot[R]{\textit{Laboratorio de Instrumentación Eléctrica}}\fancyfoot[L]{\textit{Grupo 4}}\fancyfoot[C]{\empty}
+\pagestyle{fancy}
+
+\begin{document}
+
+\maketitle
+
+\section{Anillo de rowland para Obtención de Curvas Magnéticas}
+
+\begin{center}
+    \begin{tikzpicture}[american voltages] 
+        \draw (0,0) to [isourcesin] (0,2)
+        to [short] (1,2);
+        \draw[thick] (1.75,1) circle (0.4cm);
+        \draw[thick] (2.25,1) circle (0.4cm);
+        \draw [<-,thick] (2.5,1.5)--(1.5,0.5);
+        \draw (0,0) to [short,-] (1,0)
+        to [short] (1.4671,0.7171)
+        (1,2) to [short] (1.4671,1.2828)
+        (2.53284,1.2828) to [short] (3,2)
+        (2.53284,0.7171) to [short] (3,0)
+        (3,2) to [short,-] (5.258,2)
+        % (3,0) to [short,-] (5.258,0)
+        (3,0) to [R,l^=$R_1$] (5.258,0)
+        
+        %Parte derecha
+        (6.742,2) to [short,-] (7.5,2)
+        to [R,l^=$R_2$,-] (9.5,2)
+        to [-] (10,2)
+        to [capacitor,l_=$C$] (10,0)
+        to [short,-] (6.742,0)
+        ;
+        
+        % OSCILOSCOPIO
+        \draw (11,2) to [short,-] (11,-1.625)
+        to [-] (13,-1.625)
+        to [-] (13,2)
+        to [-]  (11,2); 
+        
+        % Chanel II
+        \draw (10,1.5) to [short,*-] (10.75,1.5)
+        to [-] (10.75,1.125)
+        to [short,-o] (11,1.125)
+        (10,0.5) to [short,*-] (10.75,0.5)
+        to [-] (10.75,0.875)
+        to [short,-o] (11,0.875)
+        to [-] (11.25,0.875)
+        to [-] (11.25,0.75)
+        (11.25,0.875) to [-]  (11.25,1);
+        
+        % Chanel I
+        \draw (3.25,0) to [short,*-] (3.25,-1.25)
+        (5,0) to [short,*-] (5,-1)
+        (5,-1) to [short,-] (7.85,-1)
+        to [short,-] (7.85,-0.5)
+        to [short,-o] (11,-0.5)
+        (3.25,-1.25) to [short,-] (8.1,-1.25)
+        to [short,-] (8.1,-0.75)
+        to [short,-o] (11,-0.75) 
+        to [-] (11.25,-0.75)
+        to [-] (11.25,-0.875)
+        (11.25,-0.75) to [-]  (11.25,-0.625);
+        
+        % Detalles 
+        \draw[] (5.425,2.15) node[left]{\small$\bullet$};
+        \draw[] (6.6,2.15) node[right]{\small$\bullet$};
+        \draw[] (11.25,1) node[right]{\small CHII};
+        \draw[] (11.25,-0.625) node[right]{\small CHI};
+        \draw[] (12.5,0.1875) node[rotate=90]{OSCILOSCOPIO};
+        % Circulo exterior
+        \draw[thick,dashed] (6,1) circle (1.25cm);
+        
+        % Cuadro interior
+        \draw[thick,dashed] (6,1) circle (1.15cm);
+        \draw[thick,dashed] (6,1) circle (1.05cm);
+        
+        % Voltímetros
+        \draw[thick] (7.85,1) circle (0.35cm);
+        \draw[] (7.85,1) node[]{V$_2$};
+        \draw (7.85,2) to [short,*-] (7.85,1.35);
+        \draw[] (7.85,0) to [short,*-] (7.85,0.65);
+        \draw[thick,dashed] (6,1) circle (1.05cm);
+        
+        \draw[thick] (4.125,-0.65) circle (0.35cm);
+        \draw[] (4.125,-0.65) node[]{V$_1$};
+        \draw (3.25,-0.65) to [short,*-] (3.775,-0.65);
+        \draw[] (4.475,-0.65) to [short,-*] (5,-0.65);
+        
+        % Arrolamientos izquierda abajo
+        \draw[] (4.85,1) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.851,0.95) ellipse (0.25cm and 0.05cm);
+        \draw[] (4.8544,0.899) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.859,0.849) ellipse (0.25cm and 0.05cm);
+        \draw[] (4.867,0.800) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.889,0.751) ellipse (0.25cm and 0.05cm);
+        \draw[] (4.889,0.702) ellipse (0.25cm and 0.075cm);
+        \draw[] (4.919,0.606) ellipse (0.25cm and 0.075cm);
+        \draw[] (4.957,0.514) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.004,0.425) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.06,0.34) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.12,0.261) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.186,0.187) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.260,0.119) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.340,0.058) ellipse (0.25cm and 0.075cm);
+        % \draw[thick] (6.425,0.004) ellipse (0.25cm and 0.075cm);
+        
+        % Arrolamientos izquierda arriba
+        %\draw[thin] (5.851,0.95) ellipse (0.25cm and 0.05cm);
+        \draw[] (4.8544,1.10) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.859,0.849) ellipse (0.25cm and 0.05cm);
+        \draw[] (4.867,1.199) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.889,0.751) ellipse (0.25cm and 0.05cm);
+        \draw[] (4.889,1.297) ellipse (0.25cm and 0.075cm);
+        \draw[] (4.919,1.393) ellipse (0.25cm and 0.075cm);
+        \draw[] (4.957,1.486) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.004,1.575) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.06,1.659) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.12,1.7392) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.186,1.813) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.260,1.881) ellipse (0.25cm and 0.075cm);
+        \draw[] (5.340,1.942) ellipse (0.25cm and 0.075cm);
+        
+        
+        % Arrolamientos derecha arriba
+        \draw[] (7.15,1) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.851,0.95) ellipse (0.25cm and 0.05cm);
+        \draw[] (7.145,1.10) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.859,0.849) ellipse (0.25cm and 0.05cm);
+        \draw[] (7.132,1.199) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.889,0.751) ellipse (0.25cm and 0.05cm);
+        \draw[] (7.111,1.297) ellipse (0.25cm and 0.075cm);
+        \draw[] (7.081,1.393) ellipse (0.25cm and 0.075cm);
+        \draw[] (7.042,1.486) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.996,1.575) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.942,1.659) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.881,1.7392) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.8132,1.813) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.739,1.881) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.659,1.942) ellipse (0.25cm and 0.075cm);
+        
+        
+        % Arrolamientos derecha abajo
+        % \draw[] (7.15,1) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.851,0.95) ellipse (0.25cm and 0.05cm);
+        \draw[] (7.145,0.899) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.859,0.849) ellipse (0.25cm and 0.05cm);
+        \draw[] (7.132,0.800) ellipse (0.25cm and 0.075cm);
+        %\draw[thin] (5.889,0.751) ellipse (0.25cm and 0.05cm);
+        \draw[] (7.111,0.702) ellipse (0.25cm and 0.075cm);
+        \draw[] (7.080,0.606) ellipse (0.25cm and 0.075cm);
+        \draw[] (7.042,0.514) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.995,0.425) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.942,0.34) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.881,0.261) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.813,0.187) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.739,0.119) ellipse (0.25cm and 0.075cm);
+        \draw[] (6.659,0.058) ellipse (0.25cm and 0.075cm);
+    \end{tikzpicture}
+\end{center}
+
+\section{Marco de Epstein para Obtención de Pérdidas Magnéticas}
+\begin{center}
+    \begin{tikzpicture}[american voltages]\draw 
+        (0,0) to [isourcesin] (0,2)
+        to [short] (1,2);
+        \draw[thick] (1.75,1) circle (0.4cm);
+        \draw[thick] (2.25,1) circle (0.4cm);
+        \draw [<-,thick] (2.5,1.5)--(1.5,0.5);
+        \draw (0,0) to [short,-] (1,0)
+        to [short] (1.4671,0.7171)
+        (1,2) to [short] (1.4671,1.2828)
+        (2.53284,1.2828) to [short] (3,2)
+        (2.53284,0.7171) to [short] (3,0)
+        (3,2) to [ammeter] (5,2)
+        (5.4,1.6) to [short,-] (5.4,-0.75)
+        to [short,-] (11.05,-0.75)
+        to [short,-] (11.05,0)
+        (5.8,2) to [short,-] (6.4,2)
+        to [short,-] (6.4,1.8)
+        to [cute inductor] (6.4,1)
+        (6.4,1) to [cute inductor] (6.4,0.2)
+        (6.4,0.2) to [short,-] (6.4,0)
+        to [-] (3,0);
+        \draw[thick] (5.4,2) circle (0.4cm);
+        \draw[] (5.4,2) node[]{W};
+        
+        % Cuadro exterior
+        \draw[] (6.375,2.35)--(6.375,-0.35);
+        \draw[] (9.075,2.35)--(9.075,-0.35);
+        \draw[] (6.375,2.35)--(9.075,2.35);
+        \draw[] (6.375,-0.35)--(9.075,-0.35);
+        % Cuadro interior
+        \draw[] (6.55,2.175)--(6.55,-0.175);
+        \draw[] (8.9,2.175)--(8.9,-0.175);
+        \draw[] (6.55,2.175)--(8.9,2.175);
+        \draw[] (6.55,-0.175)--(8.9,-0.175);
+        %Parte derecha
+        \draw (9.05,0) to [short,-] (9.05,0.2)
+        to [cute inductor] (9.05,1)
+        (9.05,1) to [cute inductor] (9.05,1.8)
+        to [short,-] (9.05,2)
+        to [short,-*] (11.05,2)
+        to [push button] (11.05,0.9)
+        (11.05,0.1) to [-] (11.05,0)
+        (11.05,0) to [-] (9.05,0);
+        \draw[thick] (11.05,0.5) circle (0.4cm);
+        \draw[] (11.05,0.5) node[]{V};
+        
+        %Puntos del vatimetro
+        \draw[] (5.05,2.1) node[left]{\small$\bullet$};
+        \draw[] (5.45,2.5) node[left]{\small$\bullet$};
+        \draw[-] (5.4,2.4)--(5.4,2.8);
+        \draw[-] (5.4,2.8)--(11.05,2.8);
+        \draw[-] (11.05,2.8)--(11.05,2);
+    \end{tikzpicture}
+\end{center}
+
+\section{Calibración de Transformadores de Intensidad}
+\begin{center}
+    \ctikzset{label/align = smart}
+    \begin{tikzpicture}[american voltages]\draw 
+        (0,0) to [isourcesin] (0,2)
+        to [short] (1,2);
+        \draw[thick] (1.75,1) circle (0.4cm);
+        \draw[thick] (2.25,1) circle (0.4cm);
+        \draw [<-,thick] (2.5,1.5)--(1.5,0.5);
+        \draw (0,0) to [short,-] (1,0)
+        to [short] (1.4671,0.7171)
+        (1,2) to [short] (1.4671,1.2828)
+        (2.53284,1.2828) to [short] (3,2)
+        (2.53284,0.7171) to [short] (3,0)
+        (7,0) to [-] (7,2)
+        to [-] (6,2)
+        (4,2) to [ammeter] (6,2)
+        %(3,0) to [short] (7,0)
+        (4,2) to [-] (3,2)
+        (7,0) to [cute inductor] (5,0)
+        to [cute inductor] (3,0)
+        (3,-0.5) to [cute inductor] (5,-0.5)
+        (3,-0.5) to [R,l_=$R_{prec}$] (3,-2.5)
+        to [short] (3.75,-2.5)
+        (4.25,-2.5) to [short] (7,-2.5)
+        (7,-2.5) to [short,-] (7,-0.5)
+        (5,-0.5) to [cute inductor,-] (7,-0.5)
+        
+        %Transductor 1
+        (3.75,-2.5) to [short,-o] (3.75,-2.75)
+        (3.25,-2.75)to [short] (3.25,-4)
+        to [short] (4.75,-4)
+        to [-] (4.75,-2.75)
+        (4.25,-2.5) to [short,-o] (4.25,-2.75)
+        (3.25,-2.75) to [short,-] (4.75,-2.75)
+        (9.25,-1.85) to [-] (9.25,-1.65)
+        (6.5,-1.25) to [short,o-o] (9,-1.25)
+        
+        (9,-0.65) to [short] (9,-3.35) 
+        %Transductor 2
+        (5,-2.5) to [-] (5,-1.75)
+        to [short,-o] (5.25,-1.75)
+        (5,-0.5) to [-] (5,-1.25)
+        to [short,-o] (5.25,-1.25)
+        (5.25,-0.75) to [-] (5.25,-2.25)
+        to [-] (6.5,-2.25)
+        to [-] (6.5,-0.75)
+        to [-] (5.25,-0.75)
+        
+        %%%% What
+        (6.5,-1.75) to [short,o-o] (9,-1.75)
+        to [short] (9.25,-1.75)
+        
+        (3.75,-4) to [short,o-] (3.75,-4.75)
+        to [short] (8.25,-4.75)
+        to [short] (8.25,-2.75)
+        to [short,-o] (9,-2.75)
+        (9,-2.25) to [short] (9.25,-2.25)
+        (9.25,-2.35) to [-] (9.25,-2.15)
+        (4.25,-4) to [short,o-] (4.25,-4.25)        
+        to [short] (7.75,-4.25)
+        to [short] (7.75,-2.25)
+        to [short,-o] (9,-2.25);
+         
+        % Osciloscopio
+        \coordinate (D) at (10.75,-2);
+        \draw[] (D) node[rotate=90]{\small OSCILOSCOPIO};
+       
+         \draw (9,-3.35) to [short] (11,-3.35)
+        to [short] (11,-0.65)
+        to [short] (9,-0.65)  
+         
+         ;
+        %Transductor 1
+        \coordinate (D) at (5.275,-1.5);
+        \draw[] (D) node[left]{\small$I_E$};
+        % \coordinate (F) at (6.5,-1.5);
+        \coordinate (F) at (4,-4);
+        \draw[] (F) node[above]{\small$V_{out}^x$};
+        % Transductor 2
+        \coordinate (G) at (4,-2.75);
+        \draw[] (G) node[below]{\small$I_x$};
+        \coordinate (H) at (6.5,-1.5);
+        \draw[] (H) node[left]{\small$V_{out}^e$};
+        
+        \coordinate (E) at (5.275,-1.85);
+        \draw[] (E) node[right]{\small$\bullet$};
+        
+        \coordinate (E) at (3.5,-2.75);
+        \draw[] (E) node[below right]{\small$\bullet$};
+        
+        \coordinate (E) at (9,-1.25);
+        \draw[] (E) node[right]{\small CH2};
+        \draw[] (E) node[above right]{\small$\bullet$};
+        \coordinate (E) at (9,-2.75);
+        \draw[] (E) node[right]{\small CH1};
+        \draw[] (E) node[below right]{\small$\bullet$};
+        
+        \coordinate (E) at (2,0);
+        \draw[] (E) node[]{\small 220/0-6 V};
+        \coordinate (E) at (2,-0.25);
+        \draw[] (E) node[]{\small 15 A};
+        
+        \coordinate (E) at (4,0.25);
+        \draw[] (E) node[]{\small $TI_x$};
+        \coordinate (E) at (6,0.25);
+        \draw[] (E) node[]{\small $TI_p$};
+        \coordinate (E) at (6.25,-1.25);
+        \draw[] (E) node[]{\small $\bullet$};
+        \coordinate (E) at (3.45,-4);
+        \draw[] (E) node[above right]{\small $\bullet$};
+        \coordinate (E) at (3.45,-0.125);
+        \draw[] (E) node[]{\small $\bullet$};
+        \coordinate (E) at (3.45,-0.375);
+        \draw[] (E) node[]{\small $\bullet$};
+        \coordinate (E) at (5.45,-0.125);
+        \draw[] (E) node[]{\small $\bullet$};
+        \coordinate (E) at (5.45,-0.375);
+        \draw[] (E) node[]{\small $\bullet$};
+        \coordinate (E) at (5,-3.5);
+        \draw[] (E) node[]{\small $T_1$};
+        \coordinate (E) at (7,-2.3);
+        \draw[] (E) node[left]{\small $T_2$};
+    \end{tikzpicture}
+\end{center}
+\end{document}
